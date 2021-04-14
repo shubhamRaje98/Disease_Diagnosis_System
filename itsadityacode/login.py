@@ -9,7 +9,7 @@ import MySQLdb
 class User:
     def __init__(self, data1, data2):
         flag = 2
-        c = MySQLdb.connect('localhost', 'root', 'Pass@123', 'dds')
+        c = MySQLdb.connect('localhost', 'root', 'Pass@123', 'dds') 
         s = c.cursor()
         print('Connected To The Server....')
         print('Validating inputs....')
@@ -17,7 +17,6 @@ class User:
         rows = s.fetchall()
         print('Total number of rows = ', s.rowcount)
         for a in rows:
-            print(a)
             if a[0] == data1 and a[1] == data2:
                 flag = 1
                 break
@@ -25,12 +24,13 @@ class User:
                 flag = 0
         if flag == 1:
             messagebox.showinfo("Welcome", "Successful Login")
+            print(data1, data2)
             c.commit()
             s.close()
             c.close()
             print('Disconnected From Server....')
             self.root.destroy()
-            os.system('new.py')
+            os.system('next.py') #next file that should be opened when login successfully
         if flag == 0:
             messagebox.showerror("Alert!", "Incorrect Login Credentials")
 
