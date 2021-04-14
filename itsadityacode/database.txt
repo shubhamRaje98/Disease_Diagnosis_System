@@ -1,0 +1,14 @@
+create database dds;
+
+use dds;
+
+ CREATE TABLE LOGIN (
+	USERNAME VARCHAR(50),    
+	PASSWORD VARCHAR(30)
+);
+
+CREATE TABLE SIGNUP (
+	NAME VARCHAR(50),    
+	EMAIL VARCHAR(50),    
+	PHONE VARCHAR(10)
+);
