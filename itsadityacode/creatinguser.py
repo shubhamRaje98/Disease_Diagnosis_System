@@ -19,7 +19,6 @@ class Db:
             flag = 1;
         else:
             for a in rows:
-                print(a)
                 if a[0] == uname:
                     flag = 0
                     break
@@ -29,6 +28,7 @@ class Db:
             s.execute("insert into login values (%s, %s)", tup)
             print('Records Inserted Successfully....')
             messagebox.showinfo("Welcome", "Registered! You will be redirected to the login page")
+            print(tup)
             c.commit()
             s.close()
             c.close()
