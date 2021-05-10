@@ -58,10 +58,11 @@ class Radiobutton:
 				self.circle = None
 
 class GUI_CAD:
-	def __init__(self, risk_factor):
+	def __init__(self, risk_factor, res):
 		root_CAD = Tk()
 		root_CAD.title("Diagnosing CAD")
-		root_CAD.geometry("1400x750")
+		cent = "1000x660+160+40"
+		root_CAD.geometry(cent)
 		print("Here")
 
 		CAD_r_1 = StringVar()
@@ -83,11 +84,8 @@ class GUI_CAD:
 		CAD_my_canvas.create_image(0,0, image=CAD_bg, anchor="nw")
 
 		# Creating title text:
-		CAD_my_canvas.create_text(650, 40, text="Answer some question", font=("Times", 20), fill="white")
+		CAD_my_canvas.create_text(520, 40, text="Answer some question", font=("Times", 20), fill="white")
 		
-		# Creating title text:
-		CAD_my_canvas.create_text(650, 40, text="Answer some question", font=("Times", 20), fill="white")
-
 		# quetion 1:
 		CAD_my_canvas.create_text(220, 100, text="1) Do you have chest pain/angina ?",
 							  font=("helvetica", 15), fill="black")
@@ -185,15 +183,15 @@ class GUI_CAD:
 			if message_CAD_res == 'ok':
 				if fatality_r > 0 :
 					root_CAD.destroy()
-					Result.GUI_result("Coronary Artery Disease", fatality_r, risk_factor)
+					Result.GUI_result("Coronary Artery Disease", fatality_r, risk_factor, res)
 				else:
 					root_CAD.destroy()
-					HeartAtt.GUI_Heart_Attack(risk_factor)
+					HeartAtt.GUI_Heart_Attack(risk_factor, res)
 					#Result.GUI_result("Unkown", fatality_r, risk_factor)
 				print("Back here in GUI_CHD")
 
 		but_To_result = ttk.Button(CAD_my_canvas, text="submit", width=18, command=calculate_fatality_risk)
-		CAD_my_canvas.create_window(870, 550, window=but_To_result)
+		CAD_my_canvas.create_window(770, 580, window=but_To_result)
 
 
 
