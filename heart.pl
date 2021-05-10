@@ -1,6 +1,6 @@
 go:-
 proposition(_),
-undo.
+revoke.
 
  
 proposition(arrythmias) :- arrythmias, !.
@@ -12,46 +12,46 @@ proposition(unknown_disease).
 
 
 arrythmias :-
-prove(fluttering_in_chest),
-prove(chest_pain),
-prove(fainting),
-prove(dizziness).
+verify(fluttering_in_chest),
+verify(chest_pain),
+verify(fainting),
+verify(dizziness).
 
 congenital_heart_disease :-
-prove(blue_tiny_on_skin),
-prove(rapid_breathing),
-prove(rapid_heart_beat),
-prove(extreme_fatigue),
-prove(fainting_during_exercise),
-prove(shortness_of_breath),
-prove(swelling_in_legs_tummy_ankels).
+verify(blue_tiny_on_skin),
+verify(rapid_breathing),
+verify(rapid_heart_beat),
+verify(extreme_fatigue),
+verify(fainting_during_exercise),
+verify(shortness_of_breath),
+verify(swelling_in_legs_tummy_ankels).
 
 coronary_artery_disease :-
-prove(chest_pain_or_angina),
-prove(pain_in_leg_arms),
-prove(confusion),
-prove(fatigue),
-prove(shortness_of_breath).
+verify(chest_pain_or_angina),
+verify(pain_in_leg_arms),
+verify(confusion),
+verify(fatigue),
+verify(shortness_of_breath).
 
 heart_attack :-
-prove(chest_pain),
-prove(shortness_of_breath),
-prove(pain_discomfort_in_neck_lower_jaw),
-prove(sweating),
-prove(palpitation),
-prove(nausea).
+verify(chest_pain),
+verify(shortness_of_breath),
+verify(pain_discomfort_in_neck_lower_jaw),
+verify(sweating),
+verify(palpitation),
+verify(nausea).
 
 stroke :-
-prove(difficulty_in_walking_weak_muscels),
-prove(blummed_vision_or_double_vision),
-prove(loss_of_speech_or_difficulty_in_speaking),
-prove(fatigue_vertigo),
-prove(inability_to_understand).
+verify(difficulty_in_walking_weak_muscels),
+verify(blummed_vision_or_double_vision),
+verify(loss_of_speech_or_difficulty_in_speaking),
+verify(fatigue_vertigo),
+verify(inability_to_understand).
 
-prove(S) :- (yes(S) -> true; no(S) -> fail).
+verify(S) :- (yes(S) -> true; no(S) -> fail).
 
 :- dynamic yes/1,no/1.
 
-undo :- retract(yes(_)),fail.
-undo :- retract(no(_)),fail.
-undo.
+revoke :- retract(yes(_)),fail.		
+revoke :- retract(no(_)),fail.
+revoke.
