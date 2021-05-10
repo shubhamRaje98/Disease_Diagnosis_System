@@ -60,10 +60,11 @@ class Radiobutton:
 
 class GUI_arrythmias:
 
-	def __init__(self, risk_factor):
+	def __init__(self, risk_factor, res):
 		root_arr = Tk()
 		root_arr.title("Diagnosis Arrythmias")
-		root_arr.geometry("1200x650")
+		cent = "1000x660+160+40"
+		root_arr.geometry(cent)
 		print("In GUI_arrythmias")
 
 		arr_r_1 = StringVar()
@@ -82,7 +83,7 @@ class GUI_arrythmias:
 		arr_my_canvas.create_image(0, 0, image=arr_bg, anchor="nw")
 
 		# Creating title text:
-		arr_my_canvas.create_text(650, 40, text="Answer some question",
+		arr_my_canvas.create_text(520, 40, text="Answer some question",
 							  font=("Times", 20), fill="white")
 
 		# quetion 1:
@@ -171,16 +172,16 @@ class GUI_arrythmias:
 			if message_arr_res == 'ok':
 				if fatality_r > 0 :
 					root_arr.destroy()
-					Result.GUI_result("Arrythmias", fatality_r, risk_factor)
+					Result.GUI_result("Arrythmias", fatality_r, risk_factor, res)
 				else:
 					root_arr.destroy()
-					CHD.GUI_CHD(risk_factor)
+					CHD.GUI_CHD(risk_factor, res)
 					#Result.GUI_result("Unkown", fatality_r, risk_factor)
 				print("Back here in GUI_arrythmias")
 
 
 		but_To_result = ttk.Button(arr_my_canvas, text="submit", width=18, command=calculate_fatality_risk)
-		arr_my_canvas.create_window(870, 550, window=but_To_result)
+		arr_my_canvas.create_window(770, 550, window=but_To_result)
 
 
 
