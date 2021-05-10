@@ -3,19 +3,21 @@ import sys
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import MySQLdb
+import mysql.connector as sqlcon
+import login as log
 
 
 class Db:
     def __init__(self, tup, uname):
         flag = 2
-        c = MySQLdb.connect('localhost', 'root', 'Pass@123', 'dds')
+        c = sqlcon.connect(host='localhost', user='shubham', password='Shubh@m98', database='dds')
         s = c.cursor()
         print('Connected To The Server....')
-        s.execute("select * from login ")
+        s.execute("select * from LOGIN ")
         rows = s.fetchall()
         print('Total number of rows = ', s.rowcount)
-        if rows == ():
+        
+        if rows == []:
             flag = 1;
         else:
             for a in rows:
@@ -25,7 +27,7 @@ class Db:
                 else:
                     flag = 1
         if flag == 1:
-            s.execute("insert into login values (%s, %s)", tup)
+            s.execute("insert into LOGIN values (%s, %s)", tup)
             print('Records Inserted Successfully....')
             messagebox.showinfo("Welcome", "Registered! You will be redirected to the login page")
             print(tup)
@@ -34,7 +36,9 @@ class Db:
             c.close()
             print('Disconnected From Server....')
             self.root.destroy()
-            os.system('login.py')
+            ob = login.Login()
+            ob.widget()
+
         if flag == 0:
             messagebox.showerror("Alert!", "Username is not available")
             print('Username not available')
@@ -44,14 +48,15 @@ class User(Db):
     def __init__(self):
         self.root = Tk()
         self.root.title('WELCOME | Creating User')
-        self.root.iconbitmap("temp\\add-user.ico")
+        #self.root.iconbitmap("add-user.ico")
 
-        app_width = 1200
-        app_height = 700
+        app_width = 1300
+        app_height = 800
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.x = (screen_width / 2) - (app_width / 2)
         self.y = (screen_height / 2) - (app_height / 2)
+        self.x -= 1000
         self.cent = f'{app_width}x{app_height}+{int(self.x)}+{int(self.y)}'
         self.root.geometry(self.cent)
 
@@ -60,27 +65,27 @@ class User(Db):
         self.can = Canvas(self.f, height=700, width=1200, bd=0, highlightthickness=0)
         self.can.pack(fill='both', expand=True)
 
-        self.my1 = Image.open("temp\\user1.jpg")
+        self.my1 = Image.open("user1.jpg")
         self.new1 = self.my1.resize((1200, 700), Image.ANTIALIAS)
         self.bg1 = ImageTk.PhotoImage(self.new1)
 
-        self.my2 = Image.open("temp\\user2.png")
+        self.my2 = Image.open("user2.png")
         self.new2 = self.my2.resize((1060, 560), Image.ANTIALIAS)
         self.bg2 = ImageTk.PhotoImage(self.new2)
 
-        self.my3 = Image.open("temp\\user3.png")
+        self.my3 = Image.open("user3.png")
         self.new3 = self.my3.resize((550, 520), Image.ANTIALIAS)
         self.bg3 = ImageTk.PhotoImage(self.new3)
 
-        self.my4 = Image.open("temp\\user4.png")
+        self.my4 = Image.open("user4.png")
         self.new4 = self.my4.resize((470, 520), Image.ANTIALIAS)
         self.bg4 = ImageTk.PhotoImage(self.new4)
 
-        self.my5 = Image.open("temp\\user2.png")
+        self.my5 = Image.open("user2.png")
         self.new5 = self.my5.resize((720, 460), Image.ANTIALIAS)
         self.bg5 = ImageTk.PhotoImage(self.new5)
 
-        self.my6 = Image.open("temp\\add-user.png")
+        self.my6 = Image.open("add-user.png")
         self.new6 = self.my6.resize((200, 200), Image.ANTIALIAS)
         self.bg6 = ImageTk.PhotoImage(self.new6)
 
@@ -137,5 +142,5 @@ class User(Db):
         super().__init__(data, uname)
 
 
-ob = User()
-ob.widget()
+#ob = User()
+#ob.widget()
