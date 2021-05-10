@@ -3,15 +3,16 @@ import sys
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import MySQLdb
+import mysql.connector as sqlcon
+import creatinguser as cu
 
 
 class Db:
     def __init__(self, tup):
-        c = MySQLdb.connect('localhost', 'root', 'Pass@123', 'dds')
+        c = sqlcon.connect(host='localhost', user='shubham', password='Shubh@m98', database='dds')
         s = c.cursor()
         print('Connected To The Server....')
-        s.execute("insert into signup values (%s, %s, %s)", tup)
+        s.execute("insert into SIGNUP values (%s, %s, %s)", tup)
         print('Records Inserted Successfully....')
         c.commit()
         s.close()
@@ -19,13 +20,14 @@ class Db:
         print('Disconnected From Server....')
         messagebox.showinfo("New User", "Details saved successfully")
         self.root.destroy()
-        os.system('creatinguser.py')
+        obj=cu.User()
+        obj.widget()
 
 class SignUp(Db):
     def __init__(self):
         self.root = Tk()
         self.root.title('WELCOME | Sign Up')
-        self.root.iconbitmap("temp\\signup.ico")
+        #self.root.iconbitmap("signup.ico")
 
         app_width = 1200
         app_height = 700
@@ -34,34 +36,35 @@ class SignUp(Db):
         self.x = (screen_width / 2) - (app_width / 2)
         self.y = (screen_height / 2) - (app_height / 2)
         self.cent = f'{app_width}x{app_height}+{int(self.x)}+{int(self.y)}'
-        self.root.geometry(self.cent)
+        centt = "1140x640+140+40"
+        self.root.geometry(centt)
 
         self.f = Frame(self.root)
         self.f.pack(side=TOP, fill=BOTH)
         self.can = Canvas(self.f, height=700, width=1200, bd=0, highlightthickness=0)
         self.can.pack(fill='both', expand=True)
 
-        self.my1 = Image.open("temp\\signup1.jpg")
+        self.my1 = Image.open("signup1.jpg")
         self.new1 = self.my1.resize((1200, 700), Image.ANTIALIAS)
         self.bg1 = ImageTk.PhotoImage(self.new1)
 
-        self.my2 = Image.open("temp\\signup2.png")
+        self.my2 = Image.open("signup2.png")
         self.new2 = self.my2.resize((1060, 560), Image.ANTIALIAS)
         self.bg2 = ImageTk.PhotoImage(self.new2)
 
-        self.my3 = Image.open("temp\\signup3.png")
+        self.my3 = Image.open("signup3.png")
         self.new3 = self.my3.resize((550, 520), Image.ANTIALIAS)
         self.bg3 = ImageTk.PhotoImage(self.new3)
 
-        self.my4 = Image.open("temp\\signup4.png")
+        self.my4 = Image.open("signup4.png")
         self.new4 = self.my4.resize((470, 520), Image.ANTIALIAS)
         self.bg4 = ImageTk.PhotoImage(self.new4)
 
-        self.my5 = Image.open("temp\\signup2.png")
+        self.my5 = Image.open("signup2.png")
         self.new5 = self.my5.resize((720, 460), Image.ANTIALIAS)
         self.bg5 = ImageTk.PhotoImage(self.new5)
 
-        self.my6 = Image.open("temp\\signup.png")
+        self.my6 = Image.open("signup.png")
         self.new6 = self.my6.resize((200, 200), Image.ANTIALIAS)
         self.bg6 = ImageTk.PhotoImage(self.new6)
 
@@ -101,6 +104,7 @@ class SignUp(Db):
         else:
             data = (self.e1.get(), self.e2.get(), self.e3.get())
         super().__init__(data)
+        #ob = Db(data)
 
-ob = SignUp()
-ob.widget()
+#ob = SignUp()
+#ob.widget()
