@@ -20,7 +20,7 @@ class Prog:
 			self.risk += 1
 			print("in que_2")
 #		que_3 = input("How often you do some physical activity [frequently/rarely] : ")
-		if que_3 == 'often':
+		if que_3 == 'rarely':
 			self.risk += 1
 			print("in que_3")
 #		que_4 = input("How often you feel stressed in daily life? [often/rarely] : ")
