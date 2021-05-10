@@ -3,17 +3,20 @@ import sys
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import MySQLdb
+import mysql.connector as sqlconn
+import signup as su
+import stackOverflow_Gui as stk
+import diagnosis as dia
 
 
 class User:
     def __init__(self, data1, data2):
         flag = 2
-        c = MySQLdb.connect('localhost', 'root', 'Pass@123', 'dds') 
+        c = sqlconn.connect(host='localhost', user='shubham', password='Shubh@m98', database='dds') 
         s = c.cursor()
         print('Connected To The Server....')
         print('Validating inputs....')
-        s.execute("select * from login")
+        s.execute("select * from LOGIN")
         rows = s.fetchall()
         print('Total number of rows = ', s.rowcount)
         for a in rows:
@@ -25,12 +28,17 @@ class User:
         if flag == 1:
             messagebox.showinfo("Welcome", "Successful Login")
             print(data1, data2)
+            s.execute(f'select EMAIL from SIGNUP where NAME="{data1}"')
+            res =s.fetchall()
+            res = res[0][0]
+            print("The email is : " + res)
             c.commit()
             s.close()
             c.close()
             print('Disconnected From Server....')
             self.root.destroy()
-            os.system('next.py') #next file that should be opened when login successfully
+            dia.Diagnosis(res)
+            #stk.GUI_Prog(res) #next file that should be opened when logged in successfully
         if flag == 0:
             messagebox.showerror("Alert!", "Incorrect Login Credentials")
 
@@ -39,43 +47,44 @@ class Login(User):
     def __init__(self):
         self.root = Tk()
         self.root.title('WELCOME | Log In')
-        self.root.iconbitmap("temp\\user.ico")
+        #self.root.iconbitmap("temp\\user.ico")
 
-        app_width = 1200
-        app_height = 700
+        app_width = 1000
+        app_height = 600
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         self.x = (screen_width / 2) - (app_width / 2)
         self.y = (screen_height / 2) - (app_height / 2)
         self.cent = f'{app_width}x{app_height}+{int(self.x)}+{int(self.y)}'
-        self.root.geometry(self.cent)
+        centt = "1120x630+130+40"
+        self.root.geometry(centt)
 
         self.f = Frame(self.root)
         self.f.pack(side=TOP, fill=BOTH)
-        self.can = Canvas(self.f, height=700, width=1200, bd=0, highlightthickness=0)
+        self.can = Canvas(self.f, height=600, width=1000, bd=0, highlightthickness=0)
         self.can.pack(fill='both', expand=True)
 
-        self.my1 = Image.open("temp\\login1.png")
-        self.new1 = self.my1.resize((1200, 700), Image.ANTIALIAS)
+        self.my1 = Image.open("login1.png")
+        self.new1 = self.my1.resize((1000, 600), Image.ANTIALIAS)
         self.bg1 = ImageTk.PhotoImage(self.new1)
 
-        self.my2 = Image.open("temp\\login2.png")
-        self.new2 = self.my2.resize((1060, 560), Image.ANTIALIAS)
+        self.my2 = Image.open("login2.png")
+        self.new2 = self.my2.resize((960, 460), Image.ANTIALIAS)
         self.bg2 = ImageTk.PhotoImage(self.new2)
 
-        self.my3 = Image.open("temp\\login3.png")
-        self.new3 = self.my3.resize((550, 520), Image.ANTIALIAS)
+        self.my3 = Image.open("login3.png")
+        self.new3 = self.my3.resize((450, 420), Image.ANTIALIAS)
         self.bg3 = ImageTk.PhotoImage(self.new3)
 
-        self.my4 = Image.open("temp\\login4.png")
+        self.my4 = Image.open("login4.png")
         self.new4 = self.my4.resize((470, 520), Image.ANTIALIAS)
         self.bg4 = ImageTk.PhotoImage(self.new4)
 
-        self.my5 = Image.open("temp\\login2.png")
-        self.new5 = self.my5.resize((720, 460), Image.ANTIALIAS)
+        self.my5 = Image.open("login2.png")
+        self.new5 = self.my5.resize((520, 360), Image.ANTIALIAS)
         self.bg5 = ImageTk.PhotoImage(self.new5)
 
-        self.my6 = Image.open("temp\\user.png")
+        self.my6 = Image.open("user.png")
         self.new6 = self.my6.resize((200, 200), Image.ANTIALIAS)
         self.bg6 = ImageTk.PhotoImage(self.new6)
 
@@ -86,12 +95,13 @@ class Login(User):
         self.can.create_image(360, 120, image=self.bg5, anchor='nw')
         self.can.create_image(125, 220, image=self.bg6, anchor='nw')
 
+
     def widget(self):
         self.can.create_text(525, 190, text='Username', font=('Helvetica', 30, 'bold'))
 
         self.can.create_text(525, 299, text='Password', font=('Helvetica', 30, 'bold'))
 
-        self.can.create_text(720, 480, text="Don't have an account? Sign Up!", font=('Arial', 18, 'bold'))
+        self.can.create_text(710, 430, text="Don't have an account? Sign Up!", font=('Arial', 18, 'bold'))
         self.can.create_text(225, 450, text='Log In', font=('Helvetica', 35, 'bold'))
 
         self.e1 = Entry(self.root, font=('Helvetica', 25), bg='#dbdbdb', width=20, bd=0.5, highlightthickness=0)
@@ -112,7 +122,8 @@ class Login(User):
 
     def signup(self):
         self.root.destroy()
-        os.system('signup.py')
+        ob = su.SignUp()
+        ob.widget()
 
     def inputs(self):
         if self.e1.get() == "" and self.e2.get() == "":
@@ -128,5 +139,5 @@ class Login(User):
         super().__init__(data1, data2)
 
 
-ob = Login()
-ob.widget()
+#ob = Login()
+#ob.widget()
