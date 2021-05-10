@@ -60,10 +60,12 @@ class Radiobutton:
 
 
 class GUI_Heart_Attack:
-    def __init__(self, risk_factor):
+    def __init__(self, risk_factor, res):
         HeartAtt_root = Tk()
         HeartAtt_root.title("Diagnosing Heart Attack")
-        HeartAtt_root.geometry("1400x750")
+        cent = "1000x680+160+40"
+        HeartAtt_root.geometry(cent)
+        #HeartAtt_root.geometry("1400x750")
         
         HeartAtt_r_1 = StringVar()
         HeartAtt_r_2 = StringVar()
@@ -84,11 +86,11 @@ class GUI_Heart_Attack:
 
 
         # Creating title text:
-        HeartAtt_my_canvas.create_text(650, 40, text="Answer some question",
+        HeartAtt_my_canvas.create_text(520, 40, text="Answer some question",
                               font=("Times", 20), fill="white")
 
         # quetion 1:
-        HeartAtt_my_canvas.create_text(195, 100, text="1) Do you have Chest Pain",
+        HeartAtt_my_canvas.create_text(195, 100, text="1) Do you have Chest Pain ?",
                               font=("helvetica", 15), fill="black")
 
         HeartAtt_but_1 = Radiobutton(HeartAtt_my_canvas, text="yes", variable=HeartAtt_r_1, value="yes",
@@ -199,16 +201,16 @@ class GUI_Heart_Attack:
             if message_HeartAtt_res == 'ok':
                 if fatality_r > 0 :
                     HeartAtt_root.destroy()
-                    Result.GUI_result("Heart Attack", fatality_r, risk_factor)
+                    Result.GUI_result("Heart Attack", fatality_r, risk_factor, res)
                 else:
                     HeartAtt_root.destroy()
-                    stroke.GUI_Stroke(risk_factor)
+                    stroke.GUI_Stroke(risk_factor, res)
                     #Result.GUI_result("Unkown", fatality_r, risk_factor)
                 print("Back here in GUI_CHD")
 
        
         HeartAtt_but = ttk.Button(HeartAtt_my_canvas, text="submit", width=18, command=calculate_fatality_risk)
-        HeartAtt_my_canvas.create_window(950, 650, window=HeartAtt_but)
+        HeartAtt_my_canvas.create_window(850, 650, window=HeartAtt_but)
        
         #obj.calculate_risk_factor(que_1,que_2, que_3, que_4, que_5, que_6, que_7, que_8, que_9, que_10) 
                
