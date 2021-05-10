@@ -59,7 +59,7 @@ class Radiobutton:
 
 class GUI_CHD:
 
-	def __init__(self, risk_factor):
+	def __init__(self, risk_factor, res):
 
 		root_CHD = Tk()
 		root_CHD.title("Diagnosing CHD")
@@ -218,10 +218,10 @@ class GUI_CHD:
 			if message_CHD_res == 'ok':
 				if fatality_r > 0 :
 					root_CHD.destroy()
-					Result.GUI_result("Congenital Heart Disease", fatality_r, risk_factor)
+					Result.GUI_result("Congenital Heart Disease", fatality_r, risk_factor, res)
 				else:
 					root_CHD.destroy()
-					CAD.GUI_CAD(risk_factor)
+					CAD.GUI_CAD(risk_factor, res)
 					#Result.GUI_result("Unkown", fatality_r, risk_factor)
 				print("Back here in GUI_CHD")
 
