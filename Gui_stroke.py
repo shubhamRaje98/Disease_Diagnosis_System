@@ -61,11 +61,12 @@ class Radiobutton:
 
 class GUI_Stroke:
 
-    def __init__(self, risk_factor):
+    def __init__(self, risk_factor, res):
 
         root_Stroke = Tk()
         root_Stroke.title("Diagnosing stroke")
-        root_Stroke.geometry("1400x750")
+        cent = "1000x660+160+40"
+        root_Stroke.geometry(cent)
         print("Here")
 
         Stroke_r_1 = StringVar()
@@ -87,7 +88,7 @@ class GUI_Stroke:
         Stroke_my_canvas.create_image(0, 0, image=Stroke_bg, anchor="nw")
 
         # Creating title text:
-        Stroke_my_canvas.create_text(650, 40, text="Answer some question", font=("Times", 20), fill="white")
+        Stroke_my_canvas.create_text(520, 40, text="Answer some question", font=("Times", 20), fill="white")
 
         # quetion 1:
         Stroke_my_canvas.create_text(310, 100, text="1) Do you have difficulty in walking due to weak muscels ?",
@@ -185,15 +186,15 @@ class GUI_Stroke:
             if message_Stroke_res == 'ok':
                 if fatality_r > 0:
                     root_Stroke.destroy()
-                    Result.GUI_result("Stroke", fatality_r, risk_factor)
+                    Result.GUI_result("Stroke", fatality_r, risk_factor, res)
                 else:
                     root_Stroke.destroy()
-                    Result.GUI_result("Unkown Disease", fatality_r, risk_factor)
+                    Result.GUI_result("Unkown Disease", fatality_r, risk_factor, res)
                     #Result.GUI_result("Unkown", fatality_r, risk_factor)
                 print("Back here in GUI_CHD")
 
         Stroke_but = ttk.Button(Stroke_my_canvas, text="submit", width=18, command=calculate_fatality_risk)
-        Stroke_my_canvas.create_window(950, 650, window=Stroke_but)
+        Stroke_my_canvas.create_window(800, 580, window=Stroke_but)
 
         root_Stroke.mainloop()
     
