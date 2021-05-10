@@ -58,7 +58,7 @@ class Radiobutton:
 
 
 class GUI_Prog:
-	def __init__(self):
+	def __init__(self, res):
 		root = Tk()
 		root.title("Risk Analysis")
 		root.geometry("1200x750")
@@ -273,7 +273,7 @@ class GUI_Prog:
 			if messagboxRes == 'ok':
 				root.destroy()
 				print(risk_factor)
-				Gui_arr.GUI_arrythmias(risk_factor)
+				Gui_arr.GUI_arrythmias(risk_factor, res)
 				print("Back Here")
 
 		# creating submit button
@@ -285,4 +285,4 @@ class GUI_Prog:
 		root.mainloop()
 
 
-obj = GUI_Prog()
+#obj = GUI_Prog()
