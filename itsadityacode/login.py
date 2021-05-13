@@ -5,7 +5,7 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 import mysql.connector as sqlconn
 import signup as su
-import stackOverflow_Gui as stk
+import Risk_analysis as stk
 import diagnosis as dia
 
 
