@@ -1,5 +1,5 @@
 # Disease_Diagnosis_System
-This project provides an innovative solutions in healthcare. By providing an intelligent system that inference the disease the user may suffer. And also calculates the risk of catching the disease along with fatality chances by certain disease
+This project provides an innovative solutions in healthcare. By providing an intelligent system that infer the disease the user might be suffering. And also calculates the risk of catching the disease along with fatality chances by certain disease
 
 ![dds1](https://user-images.githubusercontent.com/59889321/131213434-61bb5c8b-fbd4-4a8a-8a94-ae3f9cd6a86b.png)
 
